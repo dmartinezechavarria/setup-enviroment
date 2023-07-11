@@ -47,6 +47,7 @@ fi
 __dir="$(cd "$(dirname "${BASH_SOURCE[${__b3bp_tmp_source_idx:-0}]}")" && pwd)"
 __file="${__dir}/$(basename "${BASH_SOURCE[${__b3bp_tmp_source_idx:-0}]}")"
 __base="$(basename "${__file}" .sh)"
+__currentdir="$(pwd)"
 # shellcheck disable=SC2034,SC2015
 __invocation="$(printf %q "${__file}")$( (($#)) && printf ' %q' "$@" || true)"
 
@@ -427,26 +428,30 @@ FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/
 FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1")
 FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1")
 FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1")
+FRONTEND_BANNERS=("frontend-banners" "ssh://git@bitbucket.united-internet.org/acp/frontend-banners.git" "main" "1" "1" "0")
 FRONTEND_LOGIN_VUE=("frontend-login-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-login-vue.git" "main" "1" "1" "1")
 FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-container-vue.git" "main" "1" "1" "1")
 FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-base-module-vue.git" "main" "1" "1" "1")
+FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-resources-module-vue.git" "main" "1" "1" "1")
 BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1")
 BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1")
 BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1")
-BACKEND_SERVICE_RESOURCES=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1")
+BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1")
 
 REPOSITORIES=(
 	FRONTEND_DOCKER[@]
 	FRONTEND_CORE[@]
 	FRONTEND_I18N_VUE[@]
 	FRONTEND_UI_VUE[@]
+	FRONTEND_BANNERS[@]
 	FRONTEND_LOGIN_VUE[@]
 	FRONTEND_CONTAINER_VUE[@]
 	FRONTEND_BASE_MODULE_VUE[@]
+	FRONTEND_RESOURCES_MODULE_VUE[@]
 	BACKEND_FOR_FRONTEND[@]
 	BACKEND_SERVICE_AUTH[@]
 	BACKEND_SERVICE_RESOURCES[@]
-	BACKEND_SERVICE_RESOURCES[@]
+	BACKEND_SERVICE_PRODUCTS[@]
 )
 
 for ((i=0; i<${#REPOSITORIES[@]}; i++))
@@ -458,11 +463,11 @@ do
 
   if [[ "$CLONE" == 1 ]]; then
     info "Cloning ${NAME} from ${URL}..."
-  if [ -d "${__dir}/${NAME}" ];
+  if [ -d "${__currentdir}/${NAME}" ];
   then
-    notice "Directory ${__dir}/${NAME} exists yet"
+    notice "Directory ${__currentdir}/${NAME} exists yet"
   else
-    git clone --branch "${BRANCH}" "${URL}" "${__dir}/${NAME}"
+    git clone --branch "${BRANCH}" "${URL}" "${__currentdir}/${NAME}"
     info "Cloned successful"
   fi
   fi
@@ -477,17 +482,17 @@ do
   DEPS=${!REPOSITORIES[i]:5:1}
 
   if [[ "$ENV" == 1 ]]; then
-	info "Creating environment file for ${NAME} on ${__dir}/${NAME}/.env..."
-	if [ -f "${__dir}/${NAME}/.env" ]; then
-		notice "File ${__dir}/${NAME}/.env exists yet"
+	info "Creating environment file for ${NAME} on ${__currentdir}/${NAME}/.env..."
+	if [ -f "${__currentdir}/${NAME}/.env" ]; then
+		notice "File ${__currentdir}/${NAME}/.env exists yet"
 	else
-	  envsubst '${USE_DOCKER}' < "${__dir}/${NAME}/.env.example" > "${__dir}/${NAME}/.env"
+	  envsubst '${USE_DOCKER}' < "${__currentdir}/${NAME}/.env.example" > "${__currentdir}/${NAME}/.env"
 	  info "Environment file created"
 	fi
   fi
 
   if [[ "$DEPS" == 1 ]]; then
 	  info "Installing dependencies for ${NAME}..."
-	  make -C "${__dir}/${NAME}/" deps
+	  make -C "${__currentdir}/${NAME}/" deps
   fi
 done
