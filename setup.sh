@@ -433,6 +433,7 @@ FRONTEND_LOGIN_VUE=("frontend-login-vue" "ssh://git@bitbucket.united-internet.or
 FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-container-vue.git" "main" "1" "1" "1")
 FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-base-module-vue.git" "main" "1" "1" "1")
 FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-resources-module-vue.git" "main" "1" "1" "1")
+FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-configuration-module-vue.git" "main" "1" "1" "1")
 BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1")
 BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1")
 BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1")
@@ -448,6 +449,7 @@ REPOSITORIES=(
 	FRONTEND_CONTAINER_VUE[@]
 	FRONTEND_BASE_MODULE_VUE[@]
 	FRONTEND_RESOURCES_MODULE_VUE[@]
+	FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE[@]
 	BACKEND_FOR_FRONTEND[@]
 	BACKEND_SERVICE_AUTH[@]
 	BACKEND_SERVICE_RESOURCES[@]
