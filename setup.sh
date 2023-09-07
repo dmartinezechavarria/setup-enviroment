@@ -424,6 +424,11 @@ else
   export USE_DOCKER='false'
 fi
 
+BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1")
+BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1")
+BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1")
+BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1")
+
 FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0")
 FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1")
 FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1")
@@ -434,12 +439,12 @@ FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-int
 FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-base-module-vue.git" "main" "1" "1" "1")
 FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-resources-module-vue.git" "main" "1" "1" "1")
 FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-configuration-module-vue.git" "main" "1" "1" "1")
-BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1")
-BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1")
-BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1")
-BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1")
 
 REPOSITORIES=(
+  BACKEND_FOR_FRONTEND[@]
+	BACKEND_SERVICE_AUTH[@]
+	BACKEND_SERVICE_RESOURCES[@]
+	BACKEND_SERVICE_PRODUCTS[@]
 	FRONTEND_DOCKER[@]
 	FRONTEND_CORE[@]
 	FRONTEND_I18N_VUE[@]
@@ -450,10 +455,6 @@ REPOSITORIES=(
 	FRONTEND_BASE_MODULE_VUE[@]
 	FRONTEND_RESOURCES_MODULE_VUE[@]
 	FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE[@]
-	BACKEND_FOR_FRONTEND[@]
-	BACKEND_SERVICE_AUTH[@]
-	BACKEND_SERVICE_RESOURCES[@]
-	BACKEND_SERVICE_PRODUCTS[@]
 )
 
 for ((i=0; i<${#REPOSITORIES[@]}; i++))
@@ -464,11 +465,14 @@ do
   CLONE=${!REPOSITORIES[i]:3:1}
 
   if [[ "$CLONE" == 1 ]]; then
-    info "Cloning ${NAME} from ${URL}..."
   if [ -d "${__currentdir}/${NAME}" ];
   then
     notice "Directory ${__currentdir}/${NAME} exists yet"
+    info "Pulling into ${__currentdir}/${NAME}..."
+    git -C "${__currentdir}/${NAME}" pull
+    info "Pulling successful"
   else
+    info "Cloning ${NAME} from ${URL}..."
     git clone --branch "${BRANCH}" "${URL}" "${__currentdir}/${NAME}"
     info "Cloned successful"
   fi
