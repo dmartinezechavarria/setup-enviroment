@@ -439,6 +439,7 @@ FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-int
 FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-base-module-vue.git" "main" "1" "1" "1")
 FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-resources-module-vue.git" "main" "1" "1" "1")
 FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-configuration-module-vue.git" "main" "1" "1" "1")
+FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-accounts-module-vue.git" "main" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -455,6 +456,7 @@ REPOSITORIES=(
 	FRONTEND_BASE_MODULE_VUE[@]
 	FRONTEND_RESOURCES_MODULE_VUE[@]
 	FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE[@]
+	FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE[@]
 )
 
 for ((i=0; i<${#REPOSITORIES[@]}; i++))
