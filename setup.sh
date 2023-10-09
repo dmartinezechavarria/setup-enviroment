@@ -441,6 +441,7 @@ FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbuc
 FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-configuration-module-vue.git" "main" "1" "1" "1")
 FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-accounts-module-vue.git" "main" "1" "1" "1")
 FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-database-users-module-vue.git" "main" "1" "1" "1")
+FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-authentication-configuration-module-vue.git" "main" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -459,6 +460,7 @@ REPOSITORIES=(
 	FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE[@]
 	FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE[@]
 	FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE[@]
+	FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE[@]
 )
 
 for ((i=0; i<${#REPOSITORIES[@]}; i++))
