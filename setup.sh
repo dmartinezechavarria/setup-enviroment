@@ -139,6 +139,11 @@ function help () {
 # shellcheck disable=SC2015
 [[ "${__usage+x}" ]] || read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
   -v                   Enable verbose mode, print script as it is executed
+  -s --setup           Clone/Pull Git repository, create .env files, install dependencies and build all projects
+  -g --git             Clone/Pull Git repository
+  -i --install-deps    Install dependencies
+  -c --create-env      Create .env files
+  -b --build           Build
   -u --use-docker      Configure repositories to use with docker
   -k --not-use-docker  Configure repositories to use without docker
   -d --debug           Enabled debug mode
@@ -404,7 +409,8 @@ fi
 ### Validation. Error out if the things required for your script are not present
 ##############################################################################
 # shellcheck disable=SC2154
-[[ "${arg_u}" == 1 ]] || [[ "${arg_k}" == 1 ]] || help      "Select setup with Docker (-u) or without it (-k)."
+[[ "${arg_s}" == 1 ]] || [[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_c}" == 1 ]] || [[ "${arg_b}" == 1 ]] || help      "You need to specified a task (-s, -g, -i, -c or -b)"
+[[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_u}" == 1 ]] || [[ "${arg_k}" == 1 ]] || help      "You need to select setup with Docker (-u) or without it (-k) for this task."
 [[ "${LOG_LEVEL:-}" ]] || emergency "Cannot continue without LOG_LEVEL. "
 
 if ! command -v envsubst &> /dev/null
@@ -416,6 +422,14 @@ fi
 
 ### Runtime
 ##############################################################################
+if [[ "${arg_s}" == 1 ]]; then
+  info "Configuring frontend project WITH Docker"
+  export arg_g=1
+  export arg_i=1
+  export arg_c=1
+  export arg_b=1
+fi
+
 if [[ "${arg_u}" == 1 ]]; then
   info "Configuring frontend project WITH Docker"
   export USE_DOCKER='true'
@@ -424,24 +438,24 @@ else
   export USE_DOCKER='false'
 fi
 
-BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1")
-BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1")
-BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1")
-BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1")
+BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1" "0")
+BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1" "0")
+BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1" "0")
+BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1" "0")
 
 FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0")
-FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1")
-FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1")
-FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1")
-FRONTEND_BANNERS=("frontend-banners" "ssh://git@bitbucket.united-internet.org/acp/frontend-banners.git" "main" "1" "1" "0")
-FRONTEND_LOGIN_VUE=("frontend-login-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-login-vue.git" "main" "1" "1" "1")
-FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-container-vue.git" "main" "1" "1" "1")
-FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-base-module-vue.git" "main" "1" "1" "1")
-FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-resources-module-vue.git" "main" "1" "1" "1")
-FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-configuration-module-vue.git" "main" "1" "1" "1")
-FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-accounts-module-vue.git" "main" "1" "1" "1")
-FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-database-users-module-vue.git" "main" "1" "1" "1")
-FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-authentication-configuration-module-vue.git" "main" "1" "1" "1")
+FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "1")
+FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_BANNERS=("frontend-banners" "ssh://git@bitbucket.united-internet.org/acp/frontend-banners.git" "main" "1" "1" "0" "0")
+FRONTEND_LOGIN_VUE=("frontend-login-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-login-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-container-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-base-module-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-resources-module-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-configuration-module-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-accounts-module-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-database-users-module-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-authentication-configuration-module-vue.git" "main" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -463,27 +477,29 @@ REPOSITORIES=(
 	FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE[@]
 )
 
-for ((i=0; i<${#REPOSITORIES[@]}; i++))
-do
-  NAME=${!REPOSITORIES[i]:0:1}
-  URL=${!REPOSITORIES[i]:1:1}
-  BRANCH=${!REPOSITORIES[i]:2:1}
-  CLONE=${!REPOSITORIES[i]:3:1}
+if [[ "${arg_g}" == 1 ]]; then
+  for ((i=0; i<${#REPOSITORIES[@]}; i++))
+  do
+    NAME=${!REPOSITORIES[i]:0:1}
+    URL=${!REPOSITORIES[i]:1:1}
+    BRANCH=${!REPOSITORIES[i]:2:1}
+    CLONE=${!REPOSITORIES[i]:3:1}
 
-  if [[ "$CLONE" == 1 ]]; then
-  if [ -d "${__currentdir}/${NAME}" ];
-  then
-    notice "Directory ${__currentdir}/${NAME} exists yet"
-    info "Pulling into ${__currentdir}/${NAME}..."
-    git -C "${__currentdir}/${NAME}" pull
-    info "Pulling successful"
-  else
-    info "Cloning ${NAME} from ${URL}..."
-    git clone --branch "${BRANCH}" "${URL}" "${__currentdir}/${NAME}"
-    info "Cloned successful"
-  fi
-  fi
-done
+    if [[ "$CLONE" == 1 ]]; then
+      if [ -d "${__currentdir}/${NAME}" ];
+      then
+        notice "Directory ${__currentdir}/${NAME} exists yet"
+        info "Pulling into ${__currentdir}/${NAME}..."
+        git -C "${__currentdir}/${NAME}" pull 1> /dev/null
+        info "Pull successful"
+      else
+        info "Cloning ${NAME} from ${URL}..."
+        git clone --branch "${BRANCH}" "${URL}" "${__currentdir}/${NAME}" 1> /dev/null
+        info "Clone successful"
+      fi
+    fi
+  done
+fi
 
 for ((i=0; i<${#REPOSITORIES[@]}; i++))
 do
@@ -492,19 +508,27 @@ do
   BRANCH=${!REPOSITORIES[i]:2:1}
   ENV=${!REPOSITORIES[i]:4:1}
   DEPS=${!REPOSITORIES[i]:5:1}
+  BUILD=${!REPOSITORIES[i]:6:1}
 
-  if [[ "$ENV" == 1 ]]; then
-	info "Creating environment file for ${NAME} on ${__currentdir}/${NAME}/.env..."
-	if [ -f "${__currentdir}/${NAME}/.env" ]; then
-		notice "File ${__currentdir}/${NAME}/.env exists yet"
-	else
-	  envsubst '${USE_DOCKER}' < "${__currentdir}/${NAME}/.env.example" > "${__currentdir}/${NAME}/.env"
-	  info "Environment file created"
-	fi
+  if [ "${arg_c}" == 1 ] && [ "$ENV" == 1 ]; then
+    info "Creating environment file for ${NAME} on ${__currentdir}/${NAME}/.env..."
+    if [ -f "${__currentdir}/${NAME}/.env" ]; then
+      notice "File ${__currentdir}/${NAME}/.env exists yet"
+    else
+      envsubst '${USE_DOCKER}' < "${__currentdir}/${NAME}/.env.example" > "${__currentdir}/${NAME}/.env"
+      info "Environment file created"
+    fi
   fi
 
-  if [[ "$DEPS" == 1 ]]; then
+  if [ "${arg_i}" == 1 ] &&  [ "$DEPS" == 1 ]; then
 	  info "Installing dependencies for ${NAME}..."
-	  make -C "${__currentdir}/${NAME}/" deps
+	  make -C "${__currentdir}/${NAME}/" deps 1> /dev/null
+	  info "Install successful"
   fi
+
+  if [ "${arg_b}" == 1 ] &&  [ "$BUILD" == 1 ]; then
+  	  info "Building ${NAME}..."
+  	  make -C "${__currentdir}/${NAME}/" build 1> /dev/null
+  	  info "Build successful"
+    fi
 done
