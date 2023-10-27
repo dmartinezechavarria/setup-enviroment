@@ -439,9 +439,12 @@ else
 fi
 
 BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1" "0")
+BACKEND_SERVICE_BASE=("backend-service-base" "ssh://git@bitbucket.united-internet.org/acp/service-base.git" "dev" "1" "1" "1" "0")
 BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1" "0")
 BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1" "0")
 BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1" "0")
+BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "ssh://git@bitbucket.united-internet.org/acp/service-notifications.git" "dev" "1" "1" "1" "0")
+BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "ssh://git@bitbucket.united-internet.org/acp/service-administrative.git" "dev" "1" "1" "1" "0")
 
 FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0")
 FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "1")
@@ -456,12 +459,16 @@ FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-m
 FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-accounts-module-vue.git" "main" "1" "1" "1" "1")
 FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-database-users-module-vue.git" "main" "1" "1" "1" "1")
 FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-authentication-configuration-module-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_NOTIFICATIONS_MODULE_VUE=("frontend-notifications-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-notifications-module-vue.git" "main" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
+  BACKEND_SERVICE_BASE[@]
 	BACKEND_SERVICE_AUTH[@]
 	BACKEND_SERVICE_RESOURCES[@]
 	BACKEND_SERVICE_PRODUCTS[@]
+	BACKEND_SERVICE_NOTIFICATIONS[@]
+	BACKEND_SERVICE_ADMINISTRATIVE[@]
 	FRONTEND_DOCKER[@]
 	FRONTEND_CORE[@]
 	FRONTEND_I18N_VUE[@]
@@ -475,6 +482,7 @@ REPOSITORIES=(
 	FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE[@]
 	FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE[@]
 	FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE[@]
+	FRONTEND_NOTIFICATIONS_MODULE_VUE[@]
 )
 
 if [[ "${arg_g}" == 1 ]]; then
