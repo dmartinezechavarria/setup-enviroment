@@ -142,6 +142,7 @@ function help () {
   -s --setup           Clone/Pull Git repository, create .env files, install dependencies and build all projects
   -g --git             Clone/Pull Git repository
   -i --install-deps    Install dependencies
+  -p --prepare         NPM prepare
   -c --create-env      Create .env files
   -b --build           Build
   -u --use-docker      Configure repositories to use with docker
@@ -409,8 +410,8 @@ fi
 ### Validation. Error out if the things required for your script are not present
 ##############################################################################
 # shellcheck disable=SC2154
-[[ "${arg_s}" == 1 ]] || [[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_c}" == 1 ]] || [[ "${arg_b}" == 1 ]] || help      "You need to specified a task (-s, -g, -i, -c or -b)"
-[[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_u}" == 1 ]] || [[ "${arg_k}" == 1 ]] || help      "You need to select setup with Docker (-u) or without it (-k) for this task."
+[[ "${arg_s}" == 1 ]] || [[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_c}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_p}" == 1 ]] || help      "You need to specified a task (-s, -g, -i, -c, -p or -b)"
+[[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_p}" == 1 ]] || [[ "${arg_u}" == 1 ]] || [[ "${arg_k}" == 1 ]] || help      "You need to select setup with Docker (-u) or without it (-k) for this task."
 [[ "${LOG_LEVEL:-}" ]] || emergency "Cannot continue without LOG_LEVEL. "
 
 if ! command -v envsubst &> /dev/null
@@ -447,9 +448,9 @@ BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "ssh://git@bitbuc
 BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "ssh://git@bitbucket.united-internet.org/acp/service-administrative.git" "dev" "1" "1" "1" "0")
 
 FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0")
-FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "1")
-FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1" "1")
-FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "0")
+FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1" "0")
+FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1" "0")
 FRONTEND_BANNERS=("frontend-banners" "ssh://git@bitbucket.united-internet.org/acp/frontend-banners.git" "main" "1" "1" "0" "0")
 FRONTEND_LOGIN_VUE=("frontend-login-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-login-vue.git" "main" "1" "1" "1" "1")
 FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-container-vue.git" "main" "1" "1" "1" "1")
@@ -460,6 +461,7 @@ FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue"
 FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-database-users-module-vue.git" "main" "1" "1" "1" "1")
 FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-authentication-configuration-module-vue.git" "main" "1" "1" "1" "1")
 FRONTEND_NOTIFICATIONS_MODULE_VUE=("frontend-notifications-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-notifications-module-vue.git" "main" "1" "1" "1" "1")
+FRONTEND_HOME_MODULE_VUE=("frontend-home-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-home-module-vue.git" "main" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -483,6 +485,7 @@ REPOSITORIES=(
 	FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE[@]
 	FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE[@]
 	FRONTEND_NOTIFICATIONS_MODULE_VUE[@]
+	FRONTEND_HOME_MODULE_VUE[@]
 )
 
 if [[ "${arg_g}" == 1 ]]; then
@@ -534,9 +537,15 @@ do
 	  info "Install successful"
   fi
 
-  if [ "${arg_b}" == 1 ] &&  [ "$BUILD" == 1 ]; then
-  	  info "Building ${NAME}..."
-  	  make -C "${__currentdir}/${NAME}/" build 1> /dev/null
-  	  info "Build successful"
+  if [ "${arg_p}" == 1 ] &&  [ "$BUILD" == 1 ]; then
+      info "NPM prepare ${NAME}..."
+      make -C "${__currentdir}/${NAME}/" npm/prepare 1> /dev/null
+      info "NPM prepare successful"
     fi
+
+  if [ "${arg_b}" == 1 ] &&  [ "$BUILD" == 1 ]; then
+    info "Building ${NAME}..."
+    make -C "${__currentdir}/${NAME}/" build 1> /dev/null
+    info "Build successful"
+  fi
 done
