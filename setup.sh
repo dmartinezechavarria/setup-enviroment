@@ -139,22 +139,47 @@ function help () {
 # shellcheck disable=SC2015
 [[ "${__usage+x}" ]] || read -r -d '' __usage <<-'EOF' || true # exits non-zero when EOF encountered
   -v                   Enable verbose mode, print script as it is executed
-  -s --setup           Clone/Pull Git repository, create .env files, install dependencies and build all projects
+  -s --setup           Clone/Pull Git repository, create .env files, install dependencies and build all frontend projects
   -g --git             Clone/Pull Git repository
-  -i --install-deps    Install dependencies
-  -p --prepare         NPM prepare
-  -c --create-env      Create .env files
-  -b --build           Build
-  -u --use-docker      Configure repositories to use with docker
-  -k --not-use-docker  Configure repositories to use without docker
+  -i --deps            Install dependencies
+  -p --prepare         NPM prepare (only frontend)
+  -c --env             Create .env files
+  -b --build           Build (only frontend)
+  -u --docker          Configure repositories to use with docker
+  -k --no-docker       Configure repositories to use without docker
   -d --debug           Enabled debug mode
   -h --help            This page
   -n --no-color        Disable color output
+  -f --frontend        Apply task to frontend projects only
+  -w --backend         Apply task to backend projects only
 EOF
 
 # shellcheck disable=SC2015
 [[ "${__helptext+x}" ]] || read -r -d '' __helptext <<-'EOF' || true # exits non-zero when EOF encountered
  Script to setup ACP frontend project on directory with and without Docker.
+
+ Examples:
+
+ Complete setup without Docker:
+ ./setup-enviroment/setup.sh --setup --no-docker
+
+ Complete setup backend projects with Docker:
+  ./setup-enviroment/setup.sh --setup --docker --backend
+
+ Git clone/pull frontend projects:
+ ./setup-enviroment/setup.sh --git --frontend
+
+ Create .env files without Docker for backend projects:
+ ./setup-enviroment/setup.sh --env --no-docker --backend
+
+ Install dependencies for backend projects:
+ ./setup-enviroment/setup.sh --deps --backend
+
+ NPM prepare for all frontend projects:
+ ./setup-enviroment/setup.sh --prepare
+
+ Build all frontend projects:
+ ./setup-enviroment/setup.sh --build
 EOF
 
 # Translate usage string -> getopts arguments, and set $arg_<flag> defaults
@@ -496,7 +521,7 @@ if [[ "${arg_g}" == 1 ]]; then
     BRANCH=${!REPOSITORIES[i]:2:1}
     CLONE=${!REPOSITORIES[i]:3:1}
 
-    if [[ "$CLONE" == 1 ]]; then
+    if ([[ "${arg_f}" == 0 ]] || [[ $NAME == frontend-* ]]) && ([[ "${arg_w}" == 0 ]] || [[ $NAME == backend-* ]]) && [[ "$CLONE" == 1 ]]; then
       if [ -d "${__currentdir}/${NAME}" ];
       then
         notice "Directory ${__currentdir}/${NAME} exists yet"
@@ -521,31 +546,33 @@ do
   DEPS=${!REPOSITORIES[i]:5:1}
   BUILD=${!REPOSITORIES[i]:6:1}
 
-  if [ "${arg_c}" == 1 ] && [ "$ENV" == 1 ]; then
-    info "Creating environment file for ${NAME} on ${__currentdir}/${NAME}/.env..."
-    if [ -f "${__currentdir}/${NAME}/.env" ]; then
-      notice "File ${__currentdir}/${NAME}/.env exists yet"
-    else
-      envsubst '${USE_DOCKER}' < "${__currentdir}/${NAME}/.env.example" > "${__currentdir}/${NAME}/.env"
-      info "Environment file created"
+  if ([[ "${arg_f}" == 0 ]] || [[ $NAME == frontend-* ]]) && ([[ "${arg_w}" == 0 ]] || [[ $NAME == backend-* ]]); then
+    if [ "${arg_c}" == 1 ] && [ "$ENV" == 1 ]; then
+      info "Creating environment file on ${__currentdir}/${NAME}/.env..."
+      if [ -f "${__currentdir}/${NAME}/.env" ]; then
+        notice "File ${__currentdir}/${NAME}/.env exists yet"
+      else
+        envsubst '${USE_DOCKER}' < "${__currentdir}/${NAME}/.env.example" > "${__currentdir}/${NAME}/.env"
+        info "Environment file created"
+      fi
     fi
-  fi
 
-  if [ "${arg_i}" == 1 ] &&  [ "$DEPS" == 1 ]; then
-	  info "Installing dependencies for ${NAME}..."
-	  make -C "${__currentdir}/${NAME}/" deps 1> /dev/null
-	  info "Install successful"
-  fi
+    if [ "${arg_i}" == 1 ] &&  [ "$DEPS" == 1 ]; then
+      info "Installing dependencies for ${NAME}..."
+      make -C "${__currentdir}/${NAME}/" deps 1> /dev/null
+      info "Install successful"
+    fi
 
-  if [ "${arg_p}" == 1 ] &&  [ "$BUILD" == 1 ]; then
+    if [ "${arg_p}" == 1 ] &&  [ "$BUILD" == 1 ]; then
       info "NPM prepare ${NAME}..."
       make -C "${__currentdir}/${NAME}/" npm/prepare 1> /dev/null
       info "NPM prepare successful"
     fi
 
-  if [ "${arg_b}" == 1 ] &&  [ "$BUILD" == 1 ]; then
-    info "Building ${NAME}..."
-    make -C "${__currentdir}/${NAME}/" build 1> /dev/null
-    info "Build successful"
+    if [ "${arg_b}" == 1 ] &&  [ "$BUILD" == 1 ]; then
+      info "Building ${NAME}..."
+      make -C "${__currentdir}/${NAME}/" build 1> /dev/null
+      info "Build successful"
+    fi
   fi
 done
