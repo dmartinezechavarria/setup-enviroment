@@ -1,2 +1,26 @@
 # Set the default behavior, in case people don't have core.autocrlf set.
-* eol=lf
+*.php eol=lf
+*.ts eol=lf
+*.js eol=lf
+*.cjs eol=lf
+*.css eol=lf
+*.vue eol=lf
+*.html eol=lf
+*.htm eol=lf
+*.json eol=lf
+*.conf eol=lf
+*.lock eol=lf
+*.example eol=lf
+*.md eol=lf
+*.sh eol=lf
+*.xml eol=lf
+*.svg eol=lf
+.env eol=lf
+.htaccess eol=lf
+.npmrc eol=lf
+.dockerignore eol=lf
+.gitattributes eol=lf
+.gitignore eol=lf
+Dockerfile eol=lf
+Jenkinsfile eol=lf
+Makefile eol=lf
