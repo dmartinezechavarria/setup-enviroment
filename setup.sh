@@ -529,11 +529,11 @@ if [[ "${arg_g}" == 1 ]]; then
       then
         warning "Directory ${__currentdir}/${NAME} exists yet"
         info "Pulling into ${__currentdir}/${NAME}..."
-        (git -C "${__currentdir}/${NAME}" pull 1> /dev/null  && notice "[Successful]") || error "[Failed]"
+        (git -C "${__currentdir}/${NAME}" pull  && notice "[Successful]") || error "[Failed]"
         echo
       else
         info "Cloning ${NAME} from ${URL}..."
-        (git clone --branch "${BRANCH}" "${URL}" "${__currentdir}/${NAME}" 1> /dev/null && notice "[Successful]") || error "[Failed]"
+        (git clone --branch "${BRANCH}" "${URL}" "${__currentdir}/${NAME}" && notice "[Successful]") || error "[Failed]"
         echo
       fi
     fi
@@ -563,22 +563,22 @@ do
 
     if [ "${arg_i}" == 1 ] &&  [ "$DEPS" == 1 ]; then
       info "Installing dependencies..."
-      (make -C "${__currentdir}/${NAME}/" deps 1> /dev/null && notice "[Successful]") || error "[Failed]"
+      (make -C "${__currentdir}/${NAME}/" deps && notice "[Successful]") || error "[Failed]"
     fi
 
     if [ "${arg_p}" == 1 ] &&  [ "$BUILD" == 1 ]; then
       info "NPM prepare..."
-      (make -C "${__currentdir}/${NAME}/" npm/prepare 1> /dev/null && notice "[Successful]") || error "[Failed]"
+      (make -C "${__currentdir}/${NAME}/" npm/prepare && notice "[Successful]") || error "[Failed]"
     fi
 
     if [ "${arg_b}" == 1 ] &&  [ "$BUILD" == 1 ]; then
       info "Building..."
-      (make -C "${__currentdir}/${NAME}/" build 1> /dev/null && notice "[Successful]") || error "[Failed]"
+      (make -C "${__currentdir}/${NAME}/" build && notice "[Successful]") || error "[Failed]"
     fi
 
     if [ "${arg_t}" == 1 ] &&  [ "$TEST" == 1 ]; then
       info "Tests..."
-      (make -C "${__currentdir}/${NAME}/" test 1> /dev/null && notice "[Successful]") || error "[Failed]"
+      (make -C "${__currentdir}/${NAME}/" test && notice "[Successful]") || error "[Failed]"
     fi
     echo
   fi
