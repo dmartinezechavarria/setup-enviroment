@@ -467,7 +467,7 @@ elif [[ "${arg_k}" == 1 ]]; then
 fi
 
 BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0")
-BACKEND_SERVICE_BASE=("backend-service-base" "ssh://git@bitbucket.united-internet.org/acp/service-base.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_BASE=("backend-service-base" "ssh://git@bitbucket.united-internet.org/acp/service-base.git" "dev" "1" "0" "1" "0" "1")
 BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1" "0" "1")
@@ -475,9 +475,9 @@ BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "ssh://git@bitbuc
 BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "ssh://git@bitbucket.united-internet.org/acp/service-administrative.git" "dev" "1" "1" "1" "0" "1")
 
 FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0")
-FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "dev" "1" "1" "1" "0" "0")
-FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "dev" "1" "1" "1" "0" "0")
-FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "dev" "1" "1" "1" "0" "0")
+FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "0" "0")
+FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1" "0" "0")
+FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1" "0" "0")
 FRONTEND_BANNERS=("frontend-banners" "ssh://git@bitbucket.united-internet.org/acp/frontend-banners.git" "main" "1" "1" "0" "0" "0")
 FRONTEND_LOGIN_VUE=("frontend-login-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-login-vue.git" "dev" "1" "1" "1" "1" "1")
 FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-container-vue.git" "dev" "1" "1" "1" "1" "1")
