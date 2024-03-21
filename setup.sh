@@ -473,6 +473,7 @@ BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.unit
 BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "ssh://git@bitbucket.united-internet.org/acp/service-notifications.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "ssh://git@bitbucket.united-internet.org/acp/service-administrative.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_MANAGEMENT=("backend-service-management" "ssh://git@bitbucket.united-internet.org/acp/service-management.git" "dev" "1" "1" "1" "0" "1")
 
 FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0")
 FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "0" "0")
@@ -498,6 +499,7 @@ REPOSITORIES=(
 	BACKEND_SERVICE_PRODUCTS[@]
 	BACKEND_SERVICE_NOTIFICATIONS[@]
 	BACKEND_SERVICE_ADMINISTRATIVE[@]
+	BACKEND_SERVICE_MANAGEMENT[@]
 	FRONTEND_DOCKER[@]
 	FRONTEND_CORE[@]
 	FRONTEND_I18N_VUE[@]
