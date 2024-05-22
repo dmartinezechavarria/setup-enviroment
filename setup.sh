@@ -491,6 +491,7 @@ FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users
 FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-authentication-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
 FRONTEND_NOTIFICATIONS_MODULE_VUE=("frontend-notifications-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-notifications-module-vue.git" "dev" "1" "1" "1" "1" "1")
 FRONTEND_HOME_MODULE_VUE=("frontend-home-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-home-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE=("frontend-web-backup-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-web-backup-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -517,6 +518,7 @@ REPOSITORIES=(
 	FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE[@]
 	FRONTEND_NOTIFICATIONS_MODULE_VUE[@]
 	FRONTEND_HOME_MODULE_VUE[@]
+	FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE[@]
 )
 
 if [[ "${arg_g}" == 1 ]]; then
