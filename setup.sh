@@ -467,7 +467,7 @@ elif [[ "${arg_k}" == 1 ]]; then
 fi
 
 BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0")
-BACKEND_SERVICE_BASE=("backend-service-base" "ssh://git@bitbucket.united-internet.org/acp/service-base.git" "dev" "1" "0" "1" "0" "1")
+BACKEND_SERVICE_BASE=("backend-service-base" "ssh://git@bitbucket.united-internet.org/acp/service-base.git" "dev" "1" "0" "1" "0" "0")
 BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1" "0" "1")
