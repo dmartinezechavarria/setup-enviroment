@@ -476,7 +476,8 @@ BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "ssh://git@bitb
 BACKEND_SERVICE_MANAGEMENT=("backend-service-management" "ssh://git@bitbucket.united-internet.org/acp/service-management.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_WORDPRESS=("backend-service-wordpress" "ssh://git@bitbucket.united-internet.org/acp/service-wordpress.git" "dev" "1" "1" "1" "0" "1")
 
-FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0")
+#FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0")
+FRONTEND_SHARED=("frontend-shared" "ssh://git@bitbucket.united-internet.org/aspd/frontend-shared.git" "main" "1" "1" "1" "0" "0")
 FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "0" "0")
 FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1" "0" "0")
 FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1" "0" "0")
@@ -503,7 +504,8 @@ REPOSITORIES=(
 	BACKEND_SERVICE_ADMINISTRATIVE[@]
 	BACKEND_SERVICE_MANAGEMENT[@]
 	BACKEND_SERVICE_WORDPRESS[@]
-	FRONTEND_DOCKER[@]
+	#FRONTEND_DOCKER[@]
+	FRONTEND_SHARED[@]
 	FRONTEND_CORE[@]
 	FRONTEND_I18N_VUE[@]
 	FRONTEND_UI_VUE[@]
