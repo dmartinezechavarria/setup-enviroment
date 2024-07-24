@@ -563,20 +563,24 @@ do
     if [ "${arg_c}" == 1 ] && [ "$ENV" == 1 ]; then
       info "Creating environment file on ${__currentdir}/${NAME}/.env"
       if [ -f "${__currentdir}/${NAME}/.env" ]; then
-        warning "File ${__currentdir}/${NAME}/.env exists yet"
-      else
-        (envsubst '${USE_DOCKER}' < "${__currentdir}/${NAME}/.env.example" > "${__currentdir}/${NAME}/.env" && notice "[Successful]") || error "[Failed]"
+        info ".env exists, removing..."
+        rm "${__currentdir}/${NAME}/.env"
       fi
+      (envsubst '${USE_DOCKER}' < "${__currentdir}/${NAME}/.env.example" > "${__currentdir}/${NAME}/.env" && notice "[Successful]") || error "[Failed]"
     fi
 
     if [ "${arg_i}" == 1 ] &&  [ "$DEPS" == 1 ]; then
+      if [ -d "${__currentdir}/${NAME}/node_modules" ]; then
+        info "node_modules exists, removing..."
+        rm -rf "${__currentdir}/${NAME}/node_modules"
+      fi
       info "Installing dependencies..."
       (make -C "${__currentdir}/${NAME}/" deps && notice "[Successful]") || error "[Failed]"
     fi
 
     if [ "${arg_p}" == 1 ] &&  [ "$BUILD" == 1 ]; then
-      info "NPM prepare..."
-      (make -C "${__currentdir}/${NAME}/" npm/prepare && notice "[Successful]") || error "[Failed]"
+      info "Deps prepare..."
+      (make -C "${__currentdir}/${NAME}/" deps/prepare && notice "[Successful]") || error "[Failed]"
     fi
 
     if [ "${arg_b}" == 1 ] &&  [ "$BUILD" == 1 ]; then
