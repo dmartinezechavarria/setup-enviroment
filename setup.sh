@@ -466,33 +466,35 @@ elif [[ "${arg_k}" == 1 ]]; then
   export USE_DOCKER='false'
 fi
 
-BACKEND_FOR_FRONTEND=("backend-for-frontend" "ssh://git@bitbucket.united-internet.org/acp/service-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0")
-BACKEND_SERVICE_BASE=("backend-service-base" "ssh://git@bitbucket.united-internet.org/acp/service-base.git" "dev" "1" "0" "1" "0" "0")
-BACKEND_SERVICE_AUTH=("backend-service-auth" "ssh://git@bitbucket.united-internet.org/acp/service-auth.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_RESOURCES=("backend-service-resources" "ssh://git@bitbucket.united-internet.org/acp/service-resources.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_PRODUCTS=("backend-service-products" "ssh://git@bitbucket.united-internet.org/acp/service-products.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "ssh://git@bitbucket.united-internet.org/acp/service-notifications.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "ssh://git@bitbucket.united-internet.org/acp/service-administrative.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_MANAGEMENT=("backend-service-management" "ssh://git@bitbucket.united-internet.org/acp/service-management.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_WORDPRESS=("backend-service-wordpress" "ssh://git@bitbucket.united-internet.org/acp/service-wordpress.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_FOR_FRONTEND=("backend-for-frontend" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0")
+BACKEND_SERVICE_BASE=("backend-service-base" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-base.git" "dev" "1" "0" "1" "0" "0")
+BACKEND_SERVICE_AUTH=("backend-service-auth" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-auth.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_RESOURCES=("backend-service-resources" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-resources.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_PRODUCTS=("backend-service-products" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-products.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-notifications.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-administrative.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_MANAGEMENT=("backend-service-management" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-management.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_SERVICE_WORDPRESS=("backend-service-wordpress" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-wordpress.git" "dev" "1" "1" "1" "0" "1")
 
-#FRONTEND_DOCKER=("frontend-docker" "ssh://git@bitbucket.united-internet.org/acp/frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0")
-FRONTEND_SHARED=("frontend-shared" "ssh://git@bitbucket.united-internet.org/aspd/frontend-shared.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_CORE=("frontend-core" "ssh://git@bitbucket.united-internet.org/acp/frontend-core.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_I18N_VUE=("frontend-i18n-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-i18n-vue.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_UI_VUE=("frontend-ui-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-ui-vue.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_BANNERS=("frontend-banners" "ssh://git@bitbucket.united-internet.org/acp/frontend-banners.git" "main" "1" "1" "0" "0" "0")
-FRONTEND_LOGIN_VUE=("frontend-login-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-login-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_CONTAINER_VUE=("frontend-container-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-container-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-base-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-resources-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-wordpress-database-users-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-authentication-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_NOTIFICATIONS_MODULE_VUE=("frontend-notifications-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-notifications-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_HOME_MODULE_VUE=("frontend-home-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-home-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE=("frontend-web-backup-configuration-module-vue" "ssh://git@bitbucket.united-internet.org/acp/frontend-web-backup-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
+#FRONTEND_DOCKER=("frontend-docker" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0")
+FRONTEND_SHARED=("frontend-shared" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-shared.git" "main" "1" "1" "1" "0" "0")
+FRONTEND_CORE=("frontend-core" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-panel-core.git" "main" "1" "1" "1" "0" "0")
+FRONTEND_I18N_VUE=("frontend-i18n-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-i18n-panel-vue.git" "main" "1" "1" "1" "0" "0")
+FRONTEND_UI_VUE=("frontend-ui-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ui-vue.git" "main" "1" "1" "1" "0" "0")
+FRONTEND_BANNERS=("frontend-banners" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-banners.git" "main" "1" "1" "0" "0" "0")
+FRONTEND_LOGIN_VUE=("frontend-login-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-login-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_CONTAINER_VUE=("frontend-container-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-container-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-base-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-resources-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-database-users-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-authentication-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_NOTIFICATIONS_MODULE_VUE=("frontend-notifications-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-notifications-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_HOME_MODULE_VUE=("frontend-home-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-home-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE=("frontend-web-backup-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-web-backup-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_SSL_CONFIGURATION_MODULE_VUE=("frontend-ssl-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_SSL_OPERATIONS_MODULE_VUE=("frontend-ssl-operations-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-operations-module-vue.git" "dev" "1" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -521,6 +523,8 @@ REPOSITORIES=(
 	FRONTEND_NOTIFICATIONS_MODULE_VUE[@]
 	FRONTEND_HOME_MODULE_VUE[@]
 	FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE[@]
+	FRONTEND_SSL_CONFIGURATION_MODULE_VUE[@]
+	FRONTEND_SSL_OPERATIONS_MODULE_VUE[@]
 )
 
 if [[ "${arg_g}" == 1 ]]; then
