@@ -466,7 +466,7 @@ elif [[ "${arg_k}" == 1 ]]; then
   export USE_DOCKER='false'
 fi
 
-BACKEND_FOR_FRONTEND=("backend-for-frontend" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0")
+BACKEND_FOR_FRONTEND=("backend-for-frontend" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-panel-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0")
 BACKEND_SERVICE_BASE=("backend-service-base" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-base.git" "dev" "1" "0" "1" "0" "0")
 BACKEND_SERVICE_AUTH=("backend-service-auth" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-auth.git" "dev" "1" "1" "1" "0" "1")
 BACKEND_SERVICE_RESOURCES=("backend-service-resources" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-resources.git" "dev" "1" "1" "1" "0" "1")
