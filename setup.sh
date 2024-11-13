@@ -495,6 +495,8 @@ FRONTEND_HOME_MODULE_VUE=("frontend-home-module-vue" "git@github.com:IONOS-Brand
 FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE=("frontend-web-backup-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-web-backup-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
 FRONTEND_SSL_CONFIGURATION_MODULE_VUE=("frontend-ssl-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
 FRONTEND_SSL_OPERATIONS_MODULE_VUE=("frontend-ssl-operations-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-operations-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_MICROSOFT365_CONFIGURATION_MODULE_VUE=("frontend-microsoft365-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-microsoft365-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
+FRONTEND_MICROSOFT365_ACCOUNTS_MODULE_VUE=("frontend-microsoft365-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-microsoft365-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -525,6 +527,8 @@ REPOSITORIES=(
 	FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE[@]
 	FRONTEND_SSL_CONFIGURATION_MODULE_VUE[@]
 	FRONTEND_SSL_OPERATIONS_MODULE_VUE[@]
+  FRONTEND_MICROSOFT365_CONFIGURATION_MODULE_VUE[@]
+  FRONTEND_MICROSOFT365_ACCOUNTS_MODULE_VUE[@]
 )
 
 if [[ "${arg_g}" == 1 ]]; then
