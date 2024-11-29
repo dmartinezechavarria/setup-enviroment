@@ -141,6 +141,7 @@ function help () {
   -v                   Enable verbose mode, print script as it is executed
   -s --setup           Clone/Pull Git repository, create .env files, install dependencies and build all frontend projects
   -g --git             Clone/Pull Git repository
+  -z --sync            Sync with base repository
   -i --deps            Install dependencies
   -t --test            Launch unit and E2E test
   -p --prepare         NPM prepare (only frontend)
@@ -437,8 +438,8 @@ fi
 ### Validation. Error out if the things required for your script are not present
 ##############################################################################
 # shellcheck disable=SC2154
-[[ "${arg_s}" == 1 ]] || [[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_c}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_p}" == 1 ]] || [[ "${arg_t}" == 1 ]] || help      "You need to specified a task (-s, -g, -i, -c, -p, -t or -b)"
-[[ "${arg_g}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_p}" == 1 ]] || [[ "${arg_u}" == 1 ]] || [[ "${arg_k}" == 1 ]] || [[ "${arg_t}" == 1 ]] || help      "You need to select setup with Docker (-u) or without it (-k) for this task."
+[[ "${arg_s}" == 1 ]] || [[ "${arg_g}" == 1 ]] || [[ "${arg_z}" == 1 ]]|| [[ "${arg_i}" == 1 ]] || [[ "${arg_c}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_p}" == 1 ]] || [[ "${arg_t}" == 1 ]] || help      "You need to specified a task (-s, -g, -z, -i, -c, -p, -t or -b)"
+[[ "${arg_g}" == 1 ]] || [[ "${arg_z}" == 1 ]] || [[ "${arg_i}" == 1 ]] || [[ "${arg_b}" == 1 ]] || [[ "${arg_p}" == 1 ]] || [[ "${arg_u}" == 1 ]] || [[ "${arg_k}" == 1 ]] || [[ "${arg_t}" == 1 ]] || help      "You need to select setup with Docker (-u) or without it (-k) for this task."
 [[ "${LOG_LEVEL:-}" ]] || emergency "Cannot continue without LOG_LEVEL. "
 
 if ! command -v envsubst &> /dev/null
@@ -466,37 +467,37 @@ elif [[ "${arg_k}" == 1 ]]; then
   export USE_DOCKER='false'
 fi
 
-BACKEND_FOR_FRONTEND=("backend-for-frontend" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-panel-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0")
-BACKEND_SERVICE_BASE=("backend-service-base" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-base.git" "dev" "1" "0" "1" "0" "0")
-BACKEND_SERVICE_AUTH=("backend-service-auth" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-auth.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_RESOURCES=("backend-service-resources" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-resources.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_PRODUCTS=("backend-service-products" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-products.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-notifications.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-administrative.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_MANAGEMENT=("backend-service-management" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-management.git" "dev" "1" "1" "1" "0" "1")
-BACKEND_SERVICE_WORDPRESS=("backend-service-wordpress" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-wordpress.git" "dev" "1" "1" "1" "0" "1")
+BACKEND_FOR_FRONTEND=("backend-for-frontend" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-panel-backend-for-frontend.git" "dev" "1" "1" "1" "0" "0" "0")
+BACKEND_SERVICE_BASE=("backend-service-base" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-base.git" "dev" "1" "0" "1" "0" "0" "0")
+BACKEND_SERVICE_AUTH=("backend-service-auth" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-auth.git" "dev" "1" "1" "1" "0" "1" "0")
+BACKEND_SERVICE_RESOURCES=("backend-service-resources" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-resources.git" "dev" "1" "1" "1" "0" "1" "0")
+BACKEND_SERVICE_PRODUCTS=("backend-service-products" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-products.git" "dev" "1" "1" "1" "0" "1" "0")
+BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-notifications.git" "dev" "1" "1" "1" "0" "1" "0")
+BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-administrative.git" "dev" "1" "1" "1" "0" "1" "0")
+BACKEND_SERVICE_MANAGEMENT=("backend-service-management" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-management.git" "dev" "1" "1" "1" "0" "1" "0")
+BACKEND_SERVICE_WORDPRESS=("backend-service-wordpress" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-wordpress.git" "dev" "1" "1" "1" "0" "1" "0")
 
-#FRONTEND_DOCKER=("frontend-docker" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0")
-FRONTEND_SHARED=("frontend-shared" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-shared.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_CORE=("frontend-core" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-panel-core.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_I18N_VUE=("frontend-i18n-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-i18n-panel-vue.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_UI_VUE=("frontend-ui-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ui-vue.git" "main" "1" "1" "1" "0" "0")
-FRONTEND_BANNERS=("frontend-banners" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-banners.git" "main" "1" "1" "0" "0" "0")
-FRONTEND_LOGIN_VUE=("frontend-login-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-login-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_CONTAINER_VUE=("frontend-container-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-container-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-base-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-resources-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-database-users-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-authentication-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_NOTIFICATIONS_MODULE_VUE=("frontend-notifications-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-notifications-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_HOME_MODULE_VUE=("frontend-home-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-home-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE=("frontend-web-backup-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-web-backup-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_SSL_CONFIGURATION_MODULE_VUE=("frontend-ssl-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_SSL_OPERATIONS_MODULE_VUE=("frontend-ssl-operations-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-operations-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_MICROSOFT365_CONFIGURATION_MODULE_VUE=("frontend-microsoft365-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-microsoft365-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1")
-FRONTEND_MICROSOFT365_ACCOUNTS_MODULE_VUE=("frontend-microsoft365-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-microsoft365-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1")
+#FRONTEND_DOCKER=("frontend-docker" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0" "0")
+FRONTEND_SHARED=("frontend-shared" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-shared.git" "main" "1" "1" "1" "0" "0" "0")
+FRONTEND_CORE=("frontend-core" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-panel-core.git" "main" "1" "1" "1" "0" "0" "0")
+FRONTEND_I18N_VUE=("frontend-i18n-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-i18n-panel-vue.git" "main" "1" "1" "1" "0" "0" "0")
+FRONTEND_UI_VUE=("frontend-ui-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ui-vue.git" "main" "1" "1" "1" "0" "0" "0")
+FRONTEND_BANNERS=("frontend-banners" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-banners.git" "main" "1" "1" "0" "0" "0" "0")
+FRONTEND_LOGIN_VUE=("frontend-login-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-login-vue.git" "dev" "1" "1" "1" "1" "1" "0")
+FRONTEND_CONTAINER_VUE=("frontend-container-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-container-vue.git" "dev" "1" "1" "1" "1" "1" "0")
+FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-base-module-vue.git" "dev" "1" "1" "1" "1" "1" "0")
+FRONTEND_RESOURCES_MODULE_VUE=("frontend-resources-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-resources-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_CONFIGURATION_MODULE_VUE=("frontend-wordpress-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_ACCOUNTS_MODULE_VUE=("frontend-wordpress-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_WORDPRESS_DATABASE_USERS_MODULE_VUE=("frontend-wordpress-database-users-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-wordpress-database-users-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_AUTHENTICATION_CONFIGURATION_MODULE_VUE=("frontend-authentication-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-authentication-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_NOTIFICATIONS_MODULE_VUE=("frontend-notifications-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-notifications-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_HOME_MODULE_VUE=("frontend-home-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-home-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_WEB_BACKUP_CONFIGURATION_MODULE_VUE=("frontend-web-backup-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-web-backup-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_SSL_CONFIGURATION_MODULE_VUE=("frontend-ssl-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_SSL_OPERATIONS_MODULE_VUE=("frontend-ssl-operations-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ssl-operations-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_MICROSOFT365_CONFIGURATION_MODULE_VUE=("frontend-microsoft365-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-microsoft365-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+FRONTEND_MICROSOFT365_ACCOUNTS_MODULE_VUE=("frontend-microsoft365-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-microsoft365-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -538,6 +539,7 @@ if [[ "${arg_g}" == 1 ]]; then
     URL=${!REPOSITORIES[i]:1:1}
     BRANCH=${!REPOSITORIES[i]:2:1}
     CLONE=${!REPOSITORIES[i]:3:1}
+    SYNC=${!REPOSITORIES[i]:8:1}
 
     if ([[ "${arg_f}" == 0 ]] || [[ $NAME == frontend-* ]]) && ([[ "${arg_w}" == 0 ]] || [[ $NAME == backend-* ]]) && [[ "$CLONE" == 1 ]]; then
       info "### ${NAME} ###"
@@ -552,6 +554,15 @@ if [[ "${arg_g}" == 1 ]]; then
         (git clone --branch "${BRANCH}" "${URL}" "${__currentdir}/${NAME}" && notice "[Successful]") || error "[Failed]"
         echo
       fi
+
+      if [[ "$SYNC" == 1 ]]; then
+        info "Setup upstream remote..."
+        if git -C "${__currentdir}/${NAME}" ls-remote --exit-code upstream > /dev/null 2>&1; then
+          info "upstream remote configured yet"
+        else
+          (make -C "${__currentdir}/${NAME}/" git/configure && notice "[Successful]") || error "[Failed]"
+        fi
+      fi
     fi
   done
 fi
@@ -565,6 +576,7 @@ do
   DEPS=${!REPOSITORIES[i]:5:1}
   BUILD=${!REPOSITORIES[i]:6:1}
   TEST=${!REPOSITORIES[i]:7:1}
+  SYNC=${!REPOSITORIES[i]:8:1}
 
   if ([[ "${arg_f}" == 0 ]] || [[ $NAME == frontend-* ]]) && ([[ "${arg_w}" == 0 ]] || [[ $NAME == backend-* ]]); then
     info "### ${NAME} ###"
@@ -578,10 +590,6 @@ do
     fi
 
     if [ "${arg_i}" == 1 ] &&  [ "$DEPS" == 1 ]; then
-      if [ -d "${__currentdir}/${NAME}/node_modules" ]; then
-        info "node_modules exists, removing..."
-        rm -rf "${__currentdir}/${NAME}/node_modules"
-      fi
       info "Installing dependencies..."
       (make -C "${__currentdir}/${NAME}/" deps && notice "[Successful]") || error "[Failed]"
     fi
@@ -600,6 +608,10 @@ do
       info "Tests..."
       (make -C "${__currentdir}/${NAME}/" test && notice "[Successful]") || error "[Failed]"
     fi
-    echo
+
+    if [ "${arg_z}" == 1 ] &&  [ "$SYNC" == 1 ]; then
+      info "Sync..."
+      (make -C "${__currentdir}/${NAME}/" git/sync && notice "[Successful]") || error "[Failed]"
+    fi
   fi
 done
