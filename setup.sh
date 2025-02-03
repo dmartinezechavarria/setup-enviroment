@@ -498,6 +498,7 @@ PANEL_SSL_CONFIGURATION_MODULE_VUE=("panel-ssl-configuration-module-vue" "git@gi
 PANEL_SSL_OPERATIONS_MODULE_VUE=("panel-ssl-operations-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-ssl-operations-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
 PANEL_MICROSOFT365_CONFIGURATION_MODULE_VUE=("panel-microsoft365-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-microsoft365-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
 PANEL_MICROSOFT365_ACCOUNTS_MODULE_VUE=("panel-microsoft365-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-microsoft365-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+PANEL_WORDPRESS_WEB_BACKUP_MODULE_VUE=("panel-wordpress-web-backup-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-wordpress-web-backup-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -531,6 +532,7 @@ REPOSITORIES=(
 	PANEL_SSL_OPERATIONS_MODULE_VUE[@]
   PANEL_MICROSOFT365_CONFIGURATION_MODULE_VUE[@]
   PANEL_MICROSOFT365_ACCOUNTS_MODULE_VUE[@]
+  PANEL_WORDPRESS_WEB_BACKUP_MODULE_VUE[@]
 )
 
 if [[ "${arg_g}" == 1 ]]; then
