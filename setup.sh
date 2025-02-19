@@ -476,6 +476,7 @@ BACKEND_SERVICE_NOTIFICATIONS=("backend-service-notifications" "git@github.com:I
 BACKEND_SERVICE_ADMINISTRATIVE=("backend-service-administrative" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-administrative.git" "dev" "1" "1" "1" "0" "1" "0")
 BACKEND_SERVICE_MANAGEMENT=("backend-service-management" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-management.git" "dev" "1" "1" "1" "0" "1" "0")
 BACKEND_SERVICE_WORDPRESS=("backend-service-wordpress" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-wordpress.git" "dev" "1" "1" "1" "0" "1" "0")
+BACKEND_SERVICE_DNS=("backend-service-dns" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-dns.git" "dev" "1" "1" "1" "0" "1" "0")
 #FRONTEND_DOCKER=("frontend-docker" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0" "0")
 FRONTEND_SHARED=("frontend-shared" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-shared.git" "main" "1" "1" "1" "0" "0" "0")
 FRONTEND_CORE=("frontend-core" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-panel-core.git" "main" "1" "1" "1" "0" "0" "0")
@@ -510,6 +511,7 @@ REPOSITORIES=(
 	BACKEND_SERVICE_ADMINISTRATIVE[@]
 	BACKEND_SERVICE_MANAGEMENT[@]
 	BACKEND_SERVICE_WORDPRESS[@]
+  BACKEND_SERVICE_DNS[@]
 	#FRONTEND_DOCKER[@]
 	FRONTEND_SHARED[@]
 	FRONTEND_CORE[@]
