@@ -479,8 +479,8 @@ BACKEND_SERVICE_WORDPRESS=("backend-service-wordpress" "git@github.com:IONOS-Bra
 BACKEND_SERVICE_DNS=("backend-service-dns" "git@github.com:IONOS-Brand-Technology/arsys-smb-service-dns.git" "dev" "1" "1" "1" "0" "1" "0")
 #FRONTEND_DOCKER=("frontend-docker" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-docker.git" "main" "${arg_u}" "${arg_u}" "0" "0" "0")
 FRONTEND_SHARED=("frontend-shared" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-shared.git" "main" "1" "1" "1" "0" "0" "0")
-FRONTEND_CORE=("frontend-core" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-panel-core.git" "main" "1" "1" "1" "0" "0" "0")
-FRONTEND_I18N_VUE=("frontend-i18n-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-i18n-panel-vue.git" "main" "1" "1" "1" "0" "0" "0")
+FRONTEND_PANEL_CORE=("frontend-panel-core" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-panel-core.git" "main" "1" "1" "1" "0" "0" "0")
+FRONTEND_PANEL_I18N_VUE=("frontend-panel-i18n-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-i18n-panel-vue.git" "main" "1" "1" "1" "0" "0" "0")
 FRONTEND_UI_VUE=("frontend-ui-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-ui-vue.git" "main" "1" "1" "1" "0" "0" "0")
 FRONTEND_BASE_CONTAINER_VUE=("frontend-base-container-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-base-container-vue.git" "dev" "1" "1" "1" "1" "1" "0")
 FRONTEND_BASE_MODULE_VUE=("frontend-base-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-frontend-base-module-vue.git" "dev" "1" "1" "1" "1" "1" "0")
@@ -500,6 +500,7 @@ PANEL_SSL_OPERATIONS_MODULE_VUE=("panel-ssl-operations-module-vue" "git@github.c
 PANEL_MICROSOFT365_CONFIGURATION_MODULE_VUE=("panel-microsoft365-configuration-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-microsoft365-configuration-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
 PANEL_MICROSOFT365_ACCOUNTS_MODULE_VUE=("panel-microsoft365-accounts-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-microsoft365-accounts-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
 PANEL_WORDPRESS_WEB_BACKUP_MODULE_VUE=("panel-wordpress-web-backup-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-wordpress-web-backup-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
+PANEL_DNS_RECORDS_MODULE_VUE=("panel-dns-records-module-vue" "git@github.com:IONOS-Brand-Technology/arsys-smb-panel-dns-records-module-vue.git" "dev" "1" "1" "1" "1" "1" "1")
 
 REPOSITORIES=(
   BACKEND_FOR_FRONTEND[@]
@@ -514,8 +515,8 @@ REPOSITORIES=(
   BACKEND_SERVICE_DNS[@]
 	#FRONTEND_DOCKER[@]
 	FRONTEND_SHARED[@]
-	FRONTEND_CORE[@]
-	FRONTEND_I18N_VUE[@]
+	FRONTEND_PANEL_CORE[@]
+	FRONTEND_PANEL_I18N_VUE[@]
 	FRONTEND_UI_VUE[@]
 	FRONTEND_BASE_CONTAINER_VUE[@]
 	FRONTEND_BASE_MODULE_VUE[@]
@@ -535,6 +536,7 @@ REPOSITORIES=(
   PANEL_MICROSOFT365_CONFIGURATION_MODULE_VUE[@]
   PANEL_MICROSOFT365_ACCOUNTS_MODULE_VUE[@]
   PANEL_WORDPRESS_WEB_BACKUP_MODULE_VUE[@]
+  PANEL_DNS_RECORDS_MODULE_VUE[@]
 )
 
 if [[ "${arg_g}" == 1 ]]; then
